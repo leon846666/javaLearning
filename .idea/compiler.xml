@@ -6,16 +6,15 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="learn-product-service" />
         <module name="learn-coupon-service" />
-        <module name="learn_product" />
+        <module name="learn-user-service" />
         <module name="learn-gateway" />
-        <module name="learn_user" />
-        <module name="learn_common" />
+        <module name="learn-common" />
         <module name="learn-order-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="learn-common" target="17" />
       <module name="learn-product" target="17" />
       <module name="learn-user" target="17" />
     </bytecodeTargetLevel>
