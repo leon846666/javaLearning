@@ -5,18 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ea4919cc-523b-45f4-b1ee-005b2a529dd9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../learn-common/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../learn-common/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../learn-common/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../learn-common/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../learn-common/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../learn-common/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../learn-common/src/main/java/org/example/SwaggerConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/../learn-common/src/main/java/org/example/SwaggerConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../learn-coupon-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../learn-coupon-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../learn-gateway/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../learn-gateway/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../learn-order-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../learn-order-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../learn-product-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../learn-product-service/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/AddressController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/AddressController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/controller/AddressController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/controller/AddressController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,7 +117,7 @@
       <workItem from="1671246538117" duration="124000" />
       <workItem from="1671246682358" duration="737000" />
       <workItem from="1671280147538" duration="7401000" />
-      <workItem from="1671350450018" duration="4278000" />
+      <workItem from="1671350450018" duration="5150000" />
     </task>
     <servers />
   </component>
