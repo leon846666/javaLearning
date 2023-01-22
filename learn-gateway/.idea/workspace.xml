@@ -4,22 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0d9a0c07-fe87-4e58-b22a-34f2a1ce47b3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../learn-common/src/main/java/org/example/enums/BizCodeEnum.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../learn-common/src/main/java/org/example/utils/JsonData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../learn-common/src/main/java/org/example/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../learn-common/src/main/java/org/example/SwaggerConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/../learn-common/src/main/java/org/example/config/SwaggerConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../learn-common/target/classes/org/example/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../learn-common/target/classes/org/example/SwaggerConfiguration.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../learn-common/target/learn-common-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../learn-common/target/learn-common-1.0-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../learn-common/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../learn-common/target/maven-archiver/pom.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../learn-common/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../learn-common/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../learn-common/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../learn-common/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../learn-user-service/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../learn-user-service/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../learn-user-service/src/main/java/org/example/controller/AddressController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../learn-user-service/src/main/java/org/example/controller/AddressController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../learn-user-service/target/classes/org/example/controller/AddressController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../learn-user-service/target/classes/org/example/controller/AddressController.class" afterDir="false" />
-    </list>
+    <list default="true" id="0d9a0c07-fe87-4e58-b22a-34f2a1ce47b3" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -49,7 +34,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "E:/development/projects/javaLearning/learn-gateway",
+    "last_opened_file_path": "E:/development/projects/javaLearning/learn-user-service",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0"
@@ -64,6 +49,7 @@
       <option name="presentableId" value="Default" />
       <updated>1673358457884</updated>
       <workItem from="1673358459318" duration="18000" />
+      <workItem from="1674222202047" duration="29000" />
     </task>
     <servers />
   </component>
