@@ -1,6 +1,8 @@
 org\example\enums\BizCodeEnum.class
 org\example\config\SwaggerConfiguration.class
-org\example\exception\CustomExceptionHandler.class
 org\example\utils\JsonData.class
-org\example\utils\CommonUtil.class
+org\example\enums\SendCodeEnum.class
 org\example\exception\BizException.class
+org\example\exception\CustomExceptionHandler.class
+org\example\utils\CheckUtil.class
+org\example\utils\CommonUtil.class
