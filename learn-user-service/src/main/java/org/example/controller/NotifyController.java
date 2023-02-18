@@ -53,7 +53,6 @@ public class NotifyController {
 
         String cacheKey = getCaptchaKey(request);
 
-
         String capText = captchaProducer.createText();
 
         //存储

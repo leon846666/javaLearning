@@ -1,3 +1,6 @@
+org\example\component\impl\MailServiceImpl.class
+org\example\service\impl\NotifyServiceImpl.class
+org\example\component\MailService.class
 org\example\model\AddressDO.class
 org\example\controller\UserController.class
 org\example\mapper\UserMapper.class
