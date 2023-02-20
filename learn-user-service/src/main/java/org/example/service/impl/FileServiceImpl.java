@@ -2,7 +2,6 @@ package org.example.service.impl;
 
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
-import com.aliyun.oss.model.Bucket;
 import com.aliyun.oss.model.PutObjectResult;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

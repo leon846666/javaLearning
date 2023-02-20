@@ -6,13 +6,12 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.AllArgsConstructor;
 import org.example.enums.BizCodeEnum;
+import org.example.request.UserRegisterRequest;
 import org.example.service.FileService;
+import org.example.service.UserService;
 import org.example.utils.JsonData;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -30,6 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class UserController {
 
     private FileService fileService;
+    private UserService userService;
 
     /**
      * 上传用户头像
@@ -46,5 +46,26 @@ public class UserController {
         return result != null?JsonData.buildSuccess(result):JsonData.buildResult(BizCodeEnum.FILE_UPLOAD_USER_IMG_FAIL);
 
     }
+
+
+    /**
+     * 用户注册
+     * @param
+     * @return
+     */
+    @ApiOperation("注册")
+    @PostMapping(value = "/register")
+    public JsonData register(@ApiParam(value = "用户注册请求",required = true) @RequestBody UserRegisterRequest userRegisterRequest){
+
+        JsonData register = userService.register(userRegisterRequest);
+
+        return register;
+
+    }
+
+
+
+
+
 }
 

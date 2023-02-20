@@ -72,4 +72,20 @@ public class NotifyServiceImpl implements NotifyService {
 
         return JsonData.buildResult(BizCodeEnum.CODE_TO_ERROR);
     }
+
+    /**
+     * @Description:
+     * @Author: Yang
+     * @Date: 2023/2/20 16:50
+     */
+    public boolean checkCode(SendCodeEnum sendCodeEnum,String to,String code){
+        String cacheKey = String.format(CacheKey.CHECK_CODE_KEY, sendCodeEnum.name(), to);
+
+        Object o = redisTemplate.opsForValue().get(cacheKey);
+        if(Objects.nonNull(o) && o.toString().equals(code)){
+            redisTemplate.delete(cacheKey);
+            return true;
+        }
+        return false;
+    }
 }
