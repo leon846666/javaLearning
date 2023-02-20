@@ -15,6 +15,7 @@ import java.util.UUID;
 public class CommonUtil {
     /**
      * 获取ip
+     *
      * @param request
      * @return
      */
@@ -50,14 +51,13 @@ public class CommonUtil {
                 }
             }
         } catch (Exception e) {
-            ipAddress="";
+            ipAddress = "";
         }
         return ipAddress;
     }
 
 
-
-    public static String MD5(String data)  {
+    public static String MD5(String data) {
         try {
             java.security.MessageDigest md = MessageDigest.getInstance("MD5");
             byte[] array = md.digest(data.getBytes("UTF-8"));
@@ -72,7 +72,8 @@ public class CommonUtil {
         return null;
 
     }
-    public static String getRandomCode(int length){
+
+    public static String getRandomCode(int length) {
         String source = "0123456789";
         Random random = new Random();
         StringBuilder builder = new StringBuilder();
@@ -82,12 +83,12 @@ public class CommonUtil {
         return builder.toString();
     }
 
-    public static long getCurrentTimeStamp (){
+    public static long getCurrentTimeStamp() {
         return System.currentTimeMillis();
     }
 
     //指定用redis的序列化方式进行序列化
-    public static RedisTemplate<String,Object> setRedisTemplate(RedisTemplate<String, Object> redisTemplate) {
+    public static RedisTemplate<String, Object> setRedisTemplate(RedisTemplate<String, Object> redisTemplate) {
         RedisSerializer stringSerializer = new StringRedisSerializer();//序列化为String
         //不能反序列化
         GenericJackson2JsonRedisSerializer serializer = new GenericJackson2JsonRedisSerializer();
@@ -98,7 +99,25 @@ public class CommonUtil {
         return redisTemplate;
     }
 
-    public static String generateUUID(){
+    public static String generateUUID() {
         return UUID.randomUUID().toString();
+    }
+
+    /**
+     * 生成指定长度随机字母和数字
+     *
+     * @param length
+     * @return
+     */
+    private static final String ALL_CHAR_NUM = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+
+    public static String getStringNumRandom(int length) {
+        //生成随机数字和字母,
+        Random random = new Random();
+        StringBuilder saltString = new StringBuilder(length);
+        for (int i = 1; i <= length; ++i) {
+            saltString.append(ALL_CHAR_NUM.charAt(random.nextInt(ALL_CHAR_NUM.length())));
+        }
+        return saltString.toString();
     }
 }

@@ -2,6 +2,7 @@ package org.example.service.impl;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.codec.digest.Md5Crypt;
 import org.apache.commons.lang3.StringUtils;
 import org.example.enums.BizCodeEnum;
 import org.example.enums.SendCodeEnum;
@@ -9,6 +10,7 @@ import org.example.mapper.UserMapper;
 import org.example.model.UserDO;
 import org.example.request.UserRegisterRequest;
 import org.example.service.UserService;
+import org.example.utils.CommonUtil;
 import org.example.utils.JsonData;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -42,11 +44,13 @@ public class UserServiceImpl implements UserService {
         UserDO userDO = new UserDO();
         BeanUtils.copyProperties(userRegisterRequest, userDO);
         userDO.setCreateTime(new Date());
+
+        //生成秘钥
+        userDO.setSecret("$1$" + CommonUtil.getStringNumRandom(8));
+        //密码 + 加盐处理
+        String cryptPwd = Md5Crypt.md5Crypt(userRegisterRequest.getPwd().getBytes(), userDO.getSecret());
+        userDO.setPwd(cryptPwd);
         int insert = userMapper.insert(userDO);
-
-        // 设置密码 todo
-        // userDO.setPwd(userRegisterRequest.getPwd());
-
         // 账号唯一性检查 todo
         if(checkUnique(userRegisterRequest.getEmail())){
             log.info("rows :{},注册成功：{}", insert, userDO);
@@ -56,7 +60,6 @@ public class UserServiceImpl implements UserService {
         }else {
             return JsonData.buildResult(BizCodeEnum.ACCOUNT_REPEAT);
         }
-
 
     }
 
