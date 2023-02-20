@@ -31,6 +31,13 @@ mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
+#阿里云OSS配置
+aliyun:
+  oss:
+    endpoint: oss-ap-southeast-2.aliyuncs.com
+    access-key-id: LTAI5tACMHSthfZKFAn3ymo7
+    access-key-secret: VuVuvxEuzIAOZzu0HpFM3BCdQfy2xF
+    bucketname: learn-user-sevice
 
 #设置日志级别,ERROR/WARN/INFO/DEBUG,默认是INFO以上才显示
 logging:

@@ -2,20 +2,15 @@ package org.example.service.impl;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.example.component.MailService;
 import org.example.constant.CacheKey;
 import org.example.enums.BizCodeEnum;
 import org.example.enums.SendCodeEnum;
-import org.example.component.MailService;
 import org.example.service.NotifyService;
 import org.example.utils.CheckUtil;
 import org.example.utils.CommonUtil;
 import org.example.utils.JsonData;
-import org.junit.platform.commons.util.StringUtils;
-import org.mockito.internal.util.StringUtil;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
-import org.springframework.data.redis.serializer.RedisSerializer;
-import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;

@@ -1,6 +1,5 @@
 package org.example.utils;
 
-import com.baomidou.mybatisplus.extension.api.R;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializer;
@@ -10,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.security.MessageDigest;
-import java.time.LocalDateTime;
 import java.util.Random;
+import java.util.UUID;
 
 public class CommonUtil {
     /**
@@ -97,5 +96,9 @@ public class CommonUtil {
         redisTemplate.setHashKeySerializer(stringSerializer);
         redisTemplate.setHashValueSerializer(serializer);
         return redisTemplate;
+    }
+
+    public static String generateUUID(){
+        return UUID.randomUUID().toString();
     }
 }

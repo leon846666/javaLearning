@@ -21,7 +21,12 @@ public enum BizCodeEnum {
      */
     ACCOUNT_REPEAT(250001,"账号已经存在"),
     ACCOUNT_UNREGISTER(250002,"账号不存在"),
-    ACCOUNT_PWD_ERROR(250003,"账号或者密码错误");
+    ACCOUNT_PWD_ERROR(250003,"账号或者密码错误"),
+
+    /**
+     *  文件上传
+     */
+    FILE_UPLOAD_USER_IMG_FAIL(600101,"用户上传头像失败");
 
     @Getter
     private String message;
