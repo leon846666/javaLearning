@@ -82,7 +82,7 @@ public class NotifyServiceImpl implements NotifyService {
         String cacheKey = String.format(CacheKey.CHECK_CODE_KEY, sendCodeEnum.name(), to);
 
         Object o = redisTemplate.opsForValue().get(cacheKey);
-8        if(Objects.nonNull(o)){
+       if(Objects.nonNull(o)){
             String cacheCode = o.toString().split("_")[0];
             if(cacheCode.equals(code)){
                 //删除验证码
