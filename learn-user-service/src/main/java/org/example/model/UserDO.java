@@ -61,7 +61,7 @@ public class UserDO implements Serializable {
     /**
      * 邮箱
      */
-    private String mail;
+    private String email;
 
     /**
      * 盐，用于个人敏感信息处理

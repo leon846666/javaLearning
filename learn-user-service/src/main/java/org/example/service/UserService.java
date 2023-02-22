@@ -1,5 +1,6 @@
 package org.example.service;
 
+import org.example.request.UserLoginRequest;
 import org.example.request.UserRegisterRequest;
 import org.example.utils.JsonData;
 
@@ -11,4 +12,6 @@ import org.example.utils.JsonData;
 public interface UserService {
 
     JsonData register(UserRegisterRequest userRegisterRequest);
+
+    JsonData login(UserLoginRequest userLoginRequest);
 }

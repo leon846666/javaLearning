@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.AllArgsConstructor;
 import org.example.enums.BizCodeEnum;
+import org.example.request.UserLoginRequest;
 import org.example.request.UserRegisterRequest;
 import org.example.service.FileService;
 import org.example.service.UserService;
@@ -56,11 +57,19 @@ public class UserController {
     @ApiOperation("注册")
     @PostMapping(value = "/register")
     public JsonData register(@ApiParam(value = "用户注册请求",required = true) @RequestBody UserRegisterRequest userRegisterRequest){
-
         JsonData register = userService.register(userRegisterRequest);
-
         return register;
+    }
 
+    /**
+     * 用户登录
+     * @param
+     * @return
+     */
+    @ApiOperation("登录")
+    @PostMapping(value = "/login")
+    public JsonData login(@ApiParam(value = "用户登录请求",required = true) @RequestBody UserLoginRequest userLoginRequest){
+        return userService.login(userLoginRequest);
     }
 
 
