@@ -43,7 +43,7 @@ public class NotifyServiceImpl implements NotifyService {
      */
 
     public JsonData sendCode(SendCodeEnum sendCodeType, String to) {
-        redisTemplate = CommonUtil.setRedisTemplate(redisTemplate);
+       // redisTemplate = CommonUtil.setRedisTemplate(redisTemplate);
         String cacheKey = String.format(CacheKey.CHECK_CODE_KEY, sendCodeType.name(), to);
         Object cacheValue = redisTemplate.opsForValue().get(cacheKey);
 

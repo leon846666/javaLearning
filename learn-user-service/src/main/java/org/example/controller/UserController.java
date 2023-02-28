@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Map;
+
 /**
  * <p>
  *  前端控制器
@@ -41,9 +43,7 @@ public class UserController {
     @ApiOperation("用户头像上传")
     @PostMapping(value = "/upload")
     public JsonData uploadHeaderImg(@ApiParam(value = "文件上传",required = true) @RequestPart("file") MultipartFile file){
-
         String result = fileService.uploadUserImage(file);
-
         return result != null?JsonData.buildSuccess(result):JsonData.buildResult(BizCodeEnum.FILE_UPLOAD_USER_IMG_FAIL);
 
     }
@@ -71,6 +71,19 @@ public class UserController {
     public JsonData login(@ApiParam(value = "用户登录请求",required = true) @RequestBody UserLoginRequest userLoginRequest){
         return userService.login(userLoginRequest);
     }
+
+    /**
+     * 刷新token
+     * @param
+     * @return
+     */
+    @ApiOperation("刷新token")
+    @PostMapping(value = "/refreshToken")
+    public JsonData refreshToken(@ApiParam(value = "刷新token",required = true) @RequestBody Map<String ,String > requestMap){
+        return userService.refreshToken(requestMap);
+    }
+
+
 
 
 

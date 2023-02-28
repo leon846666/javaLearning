@@ -1,9 +1,5 @@
 package org.example.utils;
 
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
-import org.springframework.data.redis.serializer.RedisSerializer;
-import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import javax.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
@@ -87,17 +83,7 @@ public class CommonUtil {
         return System.currentTimeMillis();
     }
 
-    //指定用redis的序列化方式进行序列化
-    public static RedisTemplate<String, Object> setRedisTemplate(RedisTemplate<String, Object> redisTemplate) {
-        RedisSerializer stringSerializer = new StringRedisSerializer();//序列化为String
-        //不能反序列化
-        GenericJackson2JsonRedisSerializer serializer = new GenericJackson2JsonRedisSerializer();
-        redisTemplate.setKeySerializer(stringSerializer);
-        redisTemplate.setValueSerializer(serializer);
-        redisTemplate.setHashKeySerializer(stringSerializer);
-        redisTemplate.setHashValueSerializer(serializer);
-        return redisTemplate;
-    }
+
 
     public static String generateUUID() {
         return UUID.randomUUID().toString();

@@ -26,8 +26,17 @@ public enum BizCodeEnum {
     /**
      *  文件上传
      */
-    FILE_UPLOAD_USER_IMG_FAIL(600101,"用户上传头像失败");
+    FILE_UPLOAD_USER_IMG_FAIL(600101,"用户上传头像失败"),
 
+    /**
+     *  刷新token
+     */
+    TOKEN_REFRESH_NOT_EXIST(260001,"刷新令牌不存在"),
+
+    /**
+     * 访问令牌
+     */
+    ACCESS_REFRESH_NOT_EXIST(260001,"访问令牌不存在");
     @Getter
     private String message;
 
