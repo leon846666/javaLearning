@@ -1,7 +1,11 @@
 package org.example.utils;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.security.MessageDigest;
@@ -84,7 +88,6 @@ public class CommonUtil {
     }
 
 
-
     public static String generateUUID() {
         return UUID.randomUUID().toString();
     }
@@ -105,5 +108,20 @@ public class CommonUtil {
             saltString.append(ALL_CHAR_NUM.charAt(random.nextInt(ALL_CHAR_NUM.length())));
         }
         return saltString.toString();
+    }
+
+    /**
+     * @Description: response JSON content
+     * @Author: Yang
+     * @Date: 2023/3/3 13:54
+     */
+    public static void sendJsonMessage(HttpServletResponse response, Object obj) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        response.setContentType("application/json; charset=utf-8");
+        try (PrintWriter writer = response.getWriter()) {
+            writer.println(objectMapper.writeValueAsString(obj));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

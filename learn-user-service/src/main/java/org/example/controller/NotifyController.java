@@ -27,7 +27,7 @@ import java.util.concurrent.TimeUnit;
 
 @RestController
 @Api(tags = "通知模块")
-@RequestMapping("/api/notify/v1")
+@RequestMapping("/api/user/v1")
 @Slf4j
 public class NotifyController {
 

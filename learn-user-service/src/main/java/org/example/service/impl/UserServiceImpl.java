@@ -133,6 +133,7 @@ public class UserServiceImpl implements UserService {
         //生成新的token
         HashMap<String, String> newToken = JWTUtil.geneJsonWebToken(user);
         redisTemplate.set(newToken.get(CacheKey.REFRESH_TOKEN_KET), 1, 1000 * 60 * 60 * 24);
+        //删除旧的token
         redisTemplate.del(refreshToken);
         //返回前端
         return JsonData.buildSuccess(newToken);
