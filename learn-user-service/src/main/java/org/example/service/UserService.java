@@ -3,6 +3,7 @@ package org.example.service;
 import org.example.request.UserLoginRequest;
 import org.example.request.UserRegisterRequest;
 import org.example.utils.JsonData;
+import org.example.vo.UserVO;
 
 import java.util.Map;
 
@@ -18,4 +19,6 @@ public interface UserService {
     JsonData login(UserLoginRequest userLoginRequest);
 
     JsonData refreshToken(Map<String, String> requestMap);
+
+    UserVO getUserDetail();
 }

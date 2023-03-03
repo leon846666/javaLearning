@@ -6,14 +6,10 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.extern.slf4j.Slf4j;
 import org.example.constant.CacheKey;
 import org.example.model.LoginUser;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
-import javax.annotation.Resources;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @Author : Yang

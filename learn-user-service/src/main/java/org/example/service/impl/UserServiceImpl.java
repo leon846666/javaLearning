@@ -10,6 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.example.constant.CacheKey;
 import org.example.enums.BizCodeEnum;
 import org.example.enums.SendCodeEnum;
+import org.example.interceptor.LoginInterceptor;
 import org.example.mapper.UserMapper;
 import org.example.model.LoginUser;
 import org.example.model.UserDO;
@@ -20,12 +21,11 @@ import org.example.utils.CommonUtil;
 import org.example.utils.JWTUtil;
 import org.example.utils.JsonData;
 import org.example.utils.RedisTemplateUtil;
+import org.example.vo.UserVO;
 import org.springframework.beans.BeanUtils;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @Author : Yang
@@ -94,7 +94,7 @@ public class UserServiceImpl implements UserService {
             String secret = userDO.getSecret();
             String md5Crypt = Md5Crypt.md5Crypt(userLoginRequest.getPwd().getBytes(), secret);
             if (md5Crypt.equals(userDO.getPwd())) {
-                LoginUser loginUser = new LoginUser();
+                LoginUser loginUser =  LoginUser.builder().build();
                 BeanUtils.copyProperties(userDO, loginUser);
                 HashMap<String, String> result = JWTUtil.geneJsonWebToken(loginUser);
                redisTemplate.set(result.get(CacheKey.REFRESH_TOKEN_KET), 1, 1000 * 60 * 60 * 24);
@@ -125,7 +125,7 @@ public class UserServiceImpl implements UserService {
         if (Objects.isNull(claims)) {
             return JsonData.buildResult(BizCodeEnum.ACCESS_REFRESH_NOT_EXIST);
         }
-        LoginUser user = new LoginUser();
+        LoginUser user =  LoginUser.builder().build();
         user.setId(Long.parseLong(claims.get("id").toString()));
         user.setHeadImg(claims.get("head_img").toString());
         user.setName(claims.get("name").toString());
@@ -137,6 +137,15 @@ public class UserServiceImpl implements UserService {
         redisTemplate.del(refreshToken);
         //返回前端
         return JsonData.buildSuccess(newToken);
+    }
+
+    @Override
+    public UserVO getUserDetail() {
+        LoginUser loginUser = LoginInterceptor.threadLocal.get();
+        UserDO userDO = userMapper.selectOne(new QueryWrapper<UserDO>().eq("id", loginUser.getId()));
+        UserVO vo = new UserVO();
+        BeanUtils.copyProperties(userDO,vo);
+        return vo;
     }
 
     /**

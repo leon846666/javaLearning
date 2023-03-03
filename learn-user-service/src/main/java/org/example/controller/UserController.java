@@ -11,6 +11,7 @@ import org.example.request.UserRegisterRequest;
 import org.example.service.FileService;
 import org.example.service.UserService;
 import org.example.utils.JsonData;
+import org.example.vo.UserVO;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -84,6 +85,19 @@ public class UserController {
     }
 
 
+
+
+    /**
+     * 个人信息查询
+     * @param
+     * @return
+     */
+    @ApiOperation("个人信息查询")
+    @GetMapping(value = "/getUserDetail")
+    public JsonData getUserDetail(){
+        UserVO vo=userService.getUserDetail();
+        return JsonData.buildSuccess(vo);
+    }
 
 
 

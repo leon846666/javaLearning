@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 @Slf4j
 public class LoginInterceptor implements HandlerInterceptor {
 
-    public static ThreadLocal<LoginUser> threadLocal;
+    public static ThreadLocal<LoginUser> threadLocal = new ThreadLocal<>();
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -45,12 +45,13 @@ public class LoginInterceptor implements HandlerInterceptor {
                 String mail = (String) claims.get("mail");
                 String name = (String) claims.get("name");
 
-                //TODO 用户信息传递
-                LoginUser loginUser = new LoginUser();
-                loginUser.setName(name);
-                loginUser.setHeadImg(headImg);
-                loginUser.setId(id);
-                loginUser.setEmail(mail);
+                // 用户信息传递
+                LoginUser loginUser =LoginUser.builder()
+                        .name(name)
+                        .headImg(headImg)
+                        .id(id)
+                        .email(mail)
+                        .build();
                 // classic way
                 //request.setAttribute("loginUser",loginUser);
 
