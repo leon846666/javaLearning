@@ -1,4 +1,4 @@
-package net.xdclass.enums;
+package org.example.enums;
 
 /**
  * 收货地址状态

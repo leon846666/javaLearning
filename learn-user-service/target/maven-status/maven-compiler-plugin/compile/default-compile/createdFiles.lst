@@ -1,10 +1,10 @@
 org\example\component\impl\MailServiceImpl.class
-org\example\service\impl\NotifyServiceImpl.class
 org\example\component\MailService.class
 org\example\model\AddressDO.class
+org\example\mapper\AddressMapper.class
+org\example\service\impl\NotifyServiceImpl.class
 org\example\controller\UserController.class
 org\example\mapper\UserMapper.class
 org\example\controller\AddressController.class
 org\example\model\UserDO.class
 org\example\UserApplication.class
-org\example\mapper\AddressMapper.class

@@ -1,4 +1,4 @@
-package net.xdclass.enums;
+package org.example.enums;
 
 /**
  * 优惠券状态

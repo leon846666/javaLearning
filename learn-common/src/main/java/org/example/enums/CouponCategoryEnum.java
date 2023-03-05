@@ -1,4 +1,4 @@
-package net.xdclass.enums;
+package org.example.enums;
 
 public enum CouponCategoryEnum {
 
