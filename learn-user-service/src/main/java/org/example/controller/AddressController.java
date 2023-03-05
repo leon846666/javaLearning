@@ -7,10 +7,15 @@ import io.swagger.annotations.ApiParam;
 import lombok.AllArgsConstructor;
 import org.example.enums.BizCodeEnum;
 import org.example.exception.BizException;
+import org.example.interceptor.LoginInterceptor;
+import org.example.model.LoginUser;
 import org.example.request.AddAddressRequest;
 import org.example.service.AddressService;
 import org.example.utils.JsonData;
+import org.example.vo.AddressVO;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * <p>
@@ -31,12 +36,10 @@ public class AddressController {
 
     @ApiOperation("根据id查找收获的地址")
     @GetMapping("find/{id}")
-    public Object getById(@ApiParam(value = "地址id", required = true) @PathVariable("id") long id) {
-        if (id == 1) {
-            throw new BizException(BizCodeEnum.ACCOUNT_REPEAT.getCode(), BizCodeEnum.ACCOUNT_REPEAT.getMessage());
+    public JsonData getById(@ApiParam(value = "地址id", required = true) @PathVariable("id") long id) {
+        AddressVO addressVO = addressService.detail(id);
 
-        }
-        return JsonData.buildSuccess(addressService.detail(id));
+        return addressVO==null ? JsonData.buildResult(BizCodeEnum.ADDRESS_NO_EXITS): JsonData.buildSuccess(addressVO);
     }
 
 
@@ -45,6 +48,27 @@ public class AddressController {
     public Object addAddress(@ApiParam(value = "新增收获底子好", required = true) @RequestBody AddAddressRequest addressRequest) {
 
         return JsonData.buildSuccess(addressService.addAddress(addressRequest));
+    }
+
+    @ApiOperation("删除收获地址")
+    @GetMapping("deleteAddress/{id}")
+    public JsonData deleteAddress(@ApiParam(value = "地址id", required = true) @PathVariable("id") long id) {
+        int i = addressService.deleteAddress(id);
+        if(i>0){
+            return JsonData.buildSuccess();
+        }
+
+        return JsonData.buildError(BizCodeEnum.ADDRESS_DEL_FAIL.getMessage());
+    }
+
+
+    @ApiOperation("根据id查找收获的地址")
+    @GetMapping("getAllUserAddress")
+    public JsonData getAllUserAddress() {
+        LoginUser loginUser = LoginInterceptor.threadLocal.get();
+        List<AddressVO>  addressVOs = addressService.getAllUserAddress(loginUser.getId());
+
+        return addressVOs==null ? JsonData.buildResult(BizCodeEnum.ADDRESS_NO_EXITS): JsonData.buildSuccess(addressVOs);
     }
 
 

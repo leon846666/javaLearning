@@ -23,7 +23,7 @@ public class JWTUtil {
     private static final String SUBJECT = "javaLearn";
     private static final String SECRET = "liuyangJWTSECRET";
     private static final String TOKEN_PREFIX = "liuyang";
-    private static long EXPIRE = 1000*60*5;
+    private static long EXPIRE = 1000*60*60*24*7;
 
     /**
      * 根据用户信息，生成令牌
