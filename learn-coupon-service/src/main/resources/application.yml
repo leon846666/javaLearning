@@ -1,0 +1,45 @@
+server:
+  port: 9001
+
+spring:
+  application:
+    name: learn-user-service
+
+  #数据库配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/javaLearn_user?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+  redis:
+    host: 192.168.56.21
+    password: 123456
+    port: 8000
+  #邮箱服务配置
+  mail:
+    host: smtp.126.com #发送邮件服务器
+    username: leon846666@126.com #发送邮件的邮箱地址
+    password: VKZVWHJKBAUWNZQN #客户端授权码，不是邮箱密码,网易的是自己设置的
+    from: leon846666@126.com # 发送邮件的地址，和上面username一致
+    properties.mail.smtp.starttls.enable: true
+    properties.mail.smtp.starttls.required: true
+    properties.mail.smtp.ssl.enable: true
+    default-encoding: utf-8
+
+#配置plus打印sql日志
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+#阿里云OSS配置
+aliyun:
+  oss:
+    endpoint: oss-ap-southeast-2.aliyuncs.com
+    access-key-id: LTAI5tACMHSthfZKFAn3ymo7
+    access-key-secret: VuVuvxEuzIAOZzu0HpFM3BCdQfy2xF
+    bucketname: learn-user-sevice
+
+#设置日志级别,ERROR/WARN/INFO/DEBUG,默认是INFO以上才显示
+logging:
+  level:
+    root: INFO
