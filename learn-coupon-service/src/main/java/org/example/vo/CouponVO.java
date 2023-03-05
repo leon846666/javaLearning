@@ -1,4 +1,4 @@
-package net.xdclass.vo;
+package org.example.vo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;

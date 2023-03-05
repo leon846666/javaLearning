@@ -45,7 +45,7 @@ public class MyBatisPlusGenerator {
        dsConfig.setDbType(DbType.MYSQL)
                .setDriverName("com.mysql.cj.jdbc.Driver")
                //TODO  TODO  TODO  TODO
-               .setUrl("jdbc:mysql://127.0.0.1:3306/javaLearn_user?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT")
+               .setUrl("jdbc:mysql://127.0.0.1:3306/javaLearn_coupon?useSSL=false&serverTimezone=GMT")
                .setUsername("root")
                .setPassword("123456");
        //3. 策略配置globalConfiguration中
@@ -60,7 +60,7 @@ public class MyBatisPlusGenerator {
                .setRestControllerStyle(true)
                // 生成的表, 支持多表一起生成，以数组形式填写
                //TODO  TODO  TODO  TODO
-               .setInclude("user","address");
+               .setInclude("coupon","coupon_record");
        //4. 包名策略配置
        PackageConfig pkConfig = new PackageConfig();
        pkConfig.setParent("net.javaLearning")

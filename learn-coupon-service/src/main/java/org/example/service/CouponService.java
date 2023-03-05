@@ -1,7 +1,9 @@
-package net.javaLearning.service;
+package org.example.service;
 
-import net.javaLearning.model.CouponDO;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.example.model.CouponDO;
+
+import java.util.Map;
 
 /**
  * <p>
@@ -11,6 +13,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author yangLiu
  * @since 2023-03-05
  */
-public interface CouponService extends IService<CouponDO> {
+public interface CouponService {
 
+    Map<String, Object> pageCouponActivity(int page, int size);
 }

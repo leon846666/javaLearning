@@ -1,4 +1,4 @@
-package net.javaLearning.model;
+package org.example.model;
 
 import java.math.BigDecimal;
 import com.baomidou.mybatisplus.annotation.TableName;

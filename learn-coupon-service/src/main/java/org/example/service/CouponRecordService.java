@@ -1,11 +1,11 @@
-package net.javaLearning.service;
+package org.example.service;
 
-import net.javaLearning.model.CouponRecordDO;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.example.model.CouponRecordDO;
 
 /**
  * <p>
- *  服务类
+ * 服务类
  * </p>
  *
  * @author yangLiu

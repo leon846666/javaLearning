@@ -1,7 +1,7 @@
-package net.javaLearning.mapper;
+package org.example.mapper;
 
-import net.javaLearning.model.CouponRecordDO;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.example.model.CouponRecordDO;
 
 /**
  * <p>
