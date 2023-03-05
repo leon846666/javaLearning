@@ -15,5 +15,5 @@ public interface AddressService {
 
     int deleteAddress(long id);
 
-    List<AddressVO> getAllUserAddress(long id);
+    List<AddressVO> getAllUserAddress();
 }

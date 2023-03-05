@@ -28,7 +28,8 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public AddressVO detail(long id) {
-        AddressDO addressDO = addressMapper.selectOne(new QueryWrapper<AddressDO>().eq("id", id));
+        LoginUser loginUser = LoginInterceptor.threadLocal.get();
+        AddressDO addressDO = addressMapper.selectOne(new QueryWrapper<AddressDO>().eq("id", id).eq("user_id",loginUser.getId()));
         if(Objects.isNull(addressDO)){
             return null;
         }
@@ -60,14 +61,16 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public int deleteAddress(long id) {
-        QueryWrapper queryWrapper = new QueryWrapper<AddressDO>().eq("id",id);
+        LoginUser loginUser = LoginInterceptor.threadLocal.get();
+        QueryWrapper queryWrapper = new QueryWrapper<AddressDO>().eq("id",id).eq("user_id",loginUser.getId());
         int delete = addressMapper.delete(queryWrapper);
         return delete;
     }
 
     @Override
-    public List<AddressVO> getAllUserAddress(long id) {
-        QueryWrapper queryWrapper = new QueryWrapper<AddressDO>().eq("user_id",id);
+    public List<AddressVO> getAllUserAddress() {
+        LoginUser loginUser = LoginInterceptor.threadLocal.get();
+        QueryWrapper queryWrapper = new QueryWrapper<AddressDO>().eq("user_id",loginUser.getId());
         List<AddressDO> list = addressMapper.selectList(queryWrapper);
 
         List<AddressVO> addressVOS = list.stream().map(obj -> {

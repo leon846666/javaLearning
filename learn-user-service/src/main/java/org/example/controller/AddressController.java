@@ -65,8 +65,8 @@ public class AddressController {
     @ApiOperation("根据id查找收获的地址")
     @GetMapping("getAllUserAddress")
     public JsonData getAllUserAddress() {
-        LoginUser loginUser = LoginInterceptor.threadLocal.get();
-        List<AddressVO>  addressVOs = addressService.getAllUserAddress(loginUser.getId());
+
+        List<AddressVO>  addressVOs = addressService.getAllUserAddress();
 
         return addressVOs==null ? JsonData.buildResult(BizCodeEnum.ADDRESS_NO_EXITS): JsonData.buildSuccess(addressVOs);
     }
