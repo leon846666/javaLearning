@@ -1,6 +1,7 @@
 package org.example.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 import org.example.model.CouponDO;
 
 /**
@@ -13,4 +14,5 @@ import org.example.model.CouponDO;
  */
 public interface CouponMapper extends BaseMapper<CouponDO> {
 
+    int reduceStock(@Param("couponId") long couponId);
 }

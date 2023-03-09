@@ -3,7 +3,7 @@
 <mapper namespace="net.javaLearning.mapper.CouponRecordMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="net.javaLearning.model.CouponRecordDO">
+    <resultMap id="BaseResultMap" type="org.example.model.CouponRecordDO">
         <id column="id" property="id" />
         <result column="coupon_id" property="couponId" />
         <result column="create_time" property="createTime" />

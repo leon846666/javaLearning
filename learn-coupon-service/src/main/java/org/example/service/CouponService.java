@@ -1,7 +1,7 @@
 package org.example.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
-import org.example.model.CouponDO;
+import org.example.enums.CouponCategoryEnum;
+import org.example.utils.JsonData;
 
 import java.util.Map;
 
@@ -16,4 +16,6 @@ import java.util.Map;
 public interface CouponService {
 
     Map<String, Object> pageCouponActivity(int page, int size);
+
+    JsonData addCoupon(long couponId, CouponCategoryEnum promotion);
 }
