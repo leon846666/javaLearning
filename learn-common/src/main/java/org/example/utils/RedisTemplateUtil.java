@@ -3,12 +3,14 @@ package org.example.utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.core.*;
+import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
+import java.time.Duration;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -131,6 +133,23 @@ public class RedisTemplateUtil {
     }
 
     /**
+     * SETNX缓存放入
+     *
+     * @param key   键
+     * @param value 值
+     * @return true成功 false失败
+     */
+    public boolean setIfAbsent(String key, Object value,long time) {
+        try {
+            return  redisTemplate.opsForValue().setIfAbsent(key, value, Duration.ofSeconds(time));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+
+    }
+
+    /**
      * 普通缓存放入并设置时间
      *
      * @param key   键
@@ -156,7 +175,7 @@ public class RedisTemplateUtil {
      * 递增
      *
      * @param key 键
-     * @param   要增加几(大于0)
+     * @param   (大于0)
      * @return
      */
     public long incr(String key, long delta) {
@@ -631,4 +650,7 @@ public class RedisTemplateUtil {
         }
     }
 
+    public Integer  execute(DefaultRedisScript tDefaultRedisScript, List<String> asList, String uuid) {
+        return null;
+    }
 }

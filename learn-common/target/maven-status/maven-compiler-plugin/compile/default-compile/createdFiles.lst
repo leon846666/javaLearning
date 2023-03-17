@@ -5,8 +5,10 @@ org\example\model\LoginUser$LoginUserBuilder.class
 org\example\enums\CouponCategoryEnum.class
 org\example\exception\BizException.class
 org\example\enums\AddressStatusEnum.class
+org\example\config\AppConfig.class
 org\example\exception\CustomExceptionHandler.class
 org\example\utils\CheckUtil.class
+org\example\enums\CouponStateEnum.class
 org\example\model\LoginUser.class
 org\example\interceptor\LoginInterceptor.class
 org\example\config\MybatisPlusPageConfig.class

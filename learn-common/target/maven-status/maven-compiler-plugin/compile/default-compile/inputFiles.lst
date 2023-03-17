@@ -6,11 +6,13 @@ E:\development\projects\javaLearning\learn-common\src\main\java\org\example\mode
 E:\development\projects\javaLearning\learn-common\src\main\java\org\example\enums\CouponPublishEnum.java
 E:\development\projects\javaLearning\learn-common\src\main\java\org\example\exception\BizException.java
 E:\development\projects\javaLearning\learn-common\src\main\java\org\example\constant\CacheKey.java
+E:\development\projects\javaLearning\learn-common\src\main\java\org\example\config\AppConfig.java
 E:\development\projects\javaLearning\learn-common\src\main\java\org\example\exception\CustomExceptionHandler.java
 E:\development\projects\javaLearning\learn-common\src\main\java\org\example\utils\JsonData.java
 E:\development\projects\javaLearning\learn-common\src\main\java\org\example\utils\JWTUtil.java
 E:\development\projects\javaLearning\learn-common\src\main\java\org\example\enums\AddressStatusEnum.java
 E:\development\projects\javaLearning\learn-common\src\main\java\org\example\enums\CouponCategoryEnum.java
+E:\development\projects\javaLearning\learn-common\src\main\java\org\example\enums\CouponStateEnum.java
 E:\development\projects\javaLearning\learn-common\src\main\java\org\example\utils\CommonUtil.java
 E:\development\projects\javaLearning\learn-common\src\main\java\org\example\interceptor\LoginInterceptor.java
 E:\development\projects\javaLearning\learn-common\src\main\java\org\example\utils\CheckUtil.java

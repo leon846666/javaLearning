@@ -19,13 +19,17 @@ import org.example.model.LoginUser;
 import org.example.service.CouponService;
 import org.example.utils.CommonUtil;
 import org.example.utils.JsonData;
+import org.example.utils.RedisTemplateUtil;
 import org.example.vo.CouponVO;
+import org.redisson.api.RLock;
+import org.redisson.api.RedissonClient;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
@@ -44,6 +48,8 @@ public class CouponServiceImpl implements CouponService {
 
     private CouponMapper couponMapper;
     private CouponRecordMapper recordMapper;
+    private RedisTemplateUtil redisTemplate;
+    private RedissonClient redissonClient;
 
     @Override
     public Map<String, Object> pageCouponActivity(int page, int size) {
@@ -79,35 +85,77 @@ public class CouponServiceImpl implements CouponService {
     @Override
     public JsonData addCoupon(long couponId, CouponCategoryEnum promotion) {
         LoginUser loginUser = LoginInterceptor.threadLocal.get();
+//        /**
+//         * 原生分布式锁 开始
+//         * 1、原子加锁 设置过期时间，防止宕机死锁
+//         * 2、原子解锁：需要判断是不是自己的锁
+//         */
+//        String uuid = CommonUtil.generateUUID();
+//        String lockKey = "lock:coupon:" + couponId;
+//        Boolean nativeLock = redisTemplate.setIfAbsent(lockKey, uuid, 30);
+//        if (nativeLock) {
+//            //加锁成功
+//            log.info("加锁：{}", nativeLock);
+//            try {
+//                //执行业务  TODO
+//            } finally {
+//                String script = "if redis.call('get',KEYS[1]) == ARGV[1] then return redis.call('del',KEYS[1]) else return 0 end";
+//
+//                Integer result = redisTemplate.execute(new DefaultRedisScript<>(script, Integer.class), Arrays.asList(lockKey), uuid);
+//                log.info("解锁：{}", result);
+//            }
+//
+//        } else {
+//            //加锁失败，睡眠100毫秒，自旋重试
+//            try {
+//                TimeUnit.MILLISECONDS.sleep(100L);
+//            } catch (InterruptedException e) {
+//            }
+//            return addCoupon(couponId, CouponCategoryEnum.PROMOTION);
+//        }
+        //原生分布式锁 结束
+        String uuid = CommonUtil.generateUUID();
+        String lockKey = "lock:coupon:" + couponId;
+        RLock lock = redissonClient.getLock(lockKey);
+        lock.lock();
+        log.info("领卷接口加锁成功 {}",Thread.currentThread().getId() );
+        try {
 
-        CouponDO couponDO = couponMapper.selectOne(new QueryWrapper<CouponDO>()
-                .eq("id", couponId)
-                .eq("category", promotion.name())
-                .eq("publish", CouponPublishEnum.PUBLISH));
-        if (null == couponDO) {
-            throw new BizException(BizCodeEnum.COUPON_NO_EXITS);
+
+            CouponDO couponDO = couponMapper.selectOne(new QueryWrapper<CouponDO>()
+                    .eq("id", couponId)
+                    .eq("category", promotion.name())
+                    .eq("publish", CouponPublishEnum.PUBLISH));
+            if (null == couponDO) {
+                throw new BizException(BizCodeEnum.COUPON_NO_EXITS);
+            }
+             checkCoupon(couponDO, loginUser.getId());
+
+            // create coupon record
+            CouponRecordDO couponRecordDO = new CouponRecordDO();
+            BeanUtils.copyProperties(couponDO, couponRecordDO);
+            couponRecordDO.setCreateTime(new Date());
+            couponRecordDO.setUseState(CouponStateEnum.NEW.name());
+            couponRecordDO.setUserId(loginUser.getId());
+            couponRecordDO.setCouponId(couponId);
+            couponRecordDO.setId(null);
+
+            // stock todo
+            int rows = couponMapper.reduceStock(couponId);
+            log.info("库存减少 :{}", rows);
+            if (rows == 1) {
+                // 库存记录扣减成功才保存记录
+                recordMapper.insert(couponRecordDO);
+            } else {
+                log.warn("发放优惠卷失败 ： {}", BizCodeEnum.COUPON_NO_STOCK);
+                throw new BizException(BizCodeEnum.COUPON_NO_STOCK);
+            }
+        }finally {
+            lock.unlock();
+            log.info("领卷接口 解锁{}",Thread.currentThread().getId());
         }
-        checkCoupon(couponDO, loginUser.getId());
 
-        // create coupon record
-        CouponRecordDO couponRecordDO = new CouponRecordDO();
-        BeanUtils.copyProperties(couponDO, couponRecordDO);
-        couponRecordDO.setCreateTime(new Date());
-        couponRecordDO.setUseState(CouponStateEnum.NEW.name());
-        couponRecordDO.setUserId(loginUser.getId());
-        couponRecordDO.setCouponId(couponId);
-        couponRecordDO.setId(null);
 
-        // stock todo
-        int rows = couponMapper.reduceStock(couponId);
-        log.info("库存减少 :{}",rows);
-        if (rows ==1) {
-            // 库存记录扣减成功才保存记录
-            recordMapper.insert(couponRecordDO);
-        } else {
-            log.warn("发放优惠卷失败 ： {}", BizCodeEnum.COUPON_NO_STOCK);
-            throw new BizException(BizCodeEnum.COUPON_NO_STOCK);
-        }
         return JsonData.buildSuccess();
     }
 
