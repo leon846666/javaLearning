@@ -16,6 +16,7 @@ import org.example.mapper.CouponRecordMapper;
 import org.example.model.CouponDO;
 import org.example.model.CouponRecordDO;
 import org.example.model.LoginUser;
+import org.example.request.NewUserCouponRequest;
 import org.example.service.CouponService;
 import org.example.utils.CommonUtil;
 import org.example.utils.JsonData;
@@ -25,11 +26,13 @@ import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
@@ -83,6 +86,7 @@ public class CouponServiceImpl implements CouponService {
      * @Date: 2023/3/7 11:43
      */
     @Override
+    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     public JsonData addCoupon(long couponId, CouponCategoryEnum promotion) {
         LoginUser loginUser = LoginInterceptor.threadLocal.get();
 //        /**
@@ -118,7 +122,7 @@ public class CouponServiceImpl implements CouponService {
         String lockKey = "lock:coupon:" + couponId;
         RLock lock = redissonClient.getLock(lockKey);
         lock.lock();
-        log.info("领卷接口加锁成功 {}",Thread.currentThread().getId() );
+        log.info("领卷接口加锁成功 {}", Thread.currentThread().getId());
         try {
 
 
@@ -129,7 +133,7 @@ public class CouponServiceImpl implements CouponService {
             if (null == couponDO) {
                 throw new BizException(BizCodeEnum.COUPON_NO_EXITS);
             }
-             checkCoupon(couponDO, loginUser.getId());
+            checkCoupon(couponDO, loginUser.getId());
 
             // create coupon record
             CouponRecordDO couponRecordDO = new CouponRecordDO();
@@ -142,6 +146,7 @@ public class CouponServiceImpl implements CouponService {
 
             // stock todo
             int rows = couponMapper.reduceStock(couponId);
+
             log.info("库存减少 :{}", rows);
             if (rows == 1) {
                 // 库存记录扣减成功才保存记录
@@ -150,11 +155,34 @@ public class CouponServiceImpl implements CouponService {
                 log.warn("发放优惠卷失败 ： {}", BizCodeEnum.COUPON_NO_STOCK);
                 throw new BizException(BizCodeEnum.COUPON_NO_STOCK);
             }
-        }finally {
+        } finally {
             lock.unlock();
-            log.info("领卷接口 解锁{}",Thread.currentThread().getId());
+            log.info("领卷接口 解锁{}", Thread.currentThread().getId());
         }
 
+
+        return JsonData.buildSuccess();
+    }
+
+    /**
+     * 用户微服务调用时，没传递token，
+     *
+     * @Author: Yang
+     * @Date: 2023/3/17 17:54
+     */
+    @Override
+    public JsonData initNewMember(NewUserCouponRequest newUserCouponRequest) {
+        LoginUser loginUser = new LoginUser();
+        loginUser.setName(newUserCouponRequest.getName());
+        loginUser.setId(newUserCouponRequest.getUserId());
+        LoginInterceptor.threadLocal.set(loginUser);
+
+        List<CouponDO> couponDOList = couponMapper.selectList(new QueryWrapper<CouponDO>()
+                .eq("category", CouponCategoryEnum.NEW_USER));
+
+        couponDOList.forEach(item -> {
+            this.addCoupon(item.getId(), CouponCategoryEnum.NEW_USER);
+        });
 
         return JsonData.buildSuccess();
     }

@@ -5,9 +5,12 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.example.enums.BizCodeEnum;
 import org.example.enums.CouponCategoryEnum;
+import org.example.request.NewUserCouponRequest;
 import org.example.service.CouponService;
 import org.example.utils.JsonData;
+import org.example.vo.CouponRecordVO;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,6 +73,19 @@ public class CouponController {
 //        return JsonData.buildSuccess();
 //
 //    }
+
+
+    /**
+     * @param
+     * @return
+     */
+    @ApiOperation("查询优惠券记录信息")
+    @PostMapping("/initNewMember")
+    public JsonData initNewMember(@ApiParam("用户对象") @RequestBody NewUserCouponRequest newUserCouponRequest){
+
+        JsonData jsonData = couponService.initNewMember(newUserCouponRequest);
+        return jsonData;
+    }
 
 }
 

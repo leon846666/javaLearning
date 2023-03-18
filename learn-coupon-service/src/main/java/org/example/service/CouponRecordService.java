@@ -1,7 +1,8 @@
 package org.example.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
-import org.example.model.CouponRecordDO;
+import org.example.vo.CouponRecordVO;
+
+import java.util.Map;
 
 /**
  * <p>
@@ -11,6 +12,10 @@ import org.example.model.CouponRecordDO;
  * @author yangLiu
  * @since 2023-03-05
  */
-public interface CouponRecordService extends IService<CouponRecordDO> {
+public interface CouponRecordService {
+
+    Map<String,Object> page(int page, int size);
+
+    CouponRecordVO findById(long recordId);
 
 }

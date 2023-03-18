@@ -1,6 +1,7 @@
 package org.example.service;
 
 import org.example.enums.CouponCategoryEnum;
+import org.example.request.NewUserCouponRequest;
 import org.example.utils.JsonData;
 
 import java.util.Map;
@@ -18,4 +19,6 @@ public interface CouponService {
     Map<String, Object> pageCouponActivity(int page, int size);
 
     JsonData addCoupon(long couponId, CouponCategoryEnum promotion);
+
+    JsonData initNewMember(NewUserCouponRequest newUserCouponRequest);
 }
